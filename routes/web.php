@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ForecastController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +16,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::view('/', 'home')->name('home.page');
-Route::view('/forecast', 'forecast')->middleware('auth')->name('forecast.page');
 Route::view('/about', 'about')->name('about.page');
 Route::view('/welcome', 'welcome')->name('welcome.page');
+
+Route::get('/forecast', [ForecastController::class, 'index'])->middleware('auth')->name('forecast.page');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

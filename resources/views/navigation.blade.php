@@ -32,7 +32,7 @@
         </form>
 
         @auth
-          <div class="nav-item dropdown">
+          <div class="nav-item dropdown ms-3">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hello, {{ Auth::user()->name}}</a>
               <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="/dashboard">Dashboard</a></li>
@@ -47,7 +47,7 @@
               </ul>
           </div>
         @else
-          <a href="/login" class="btn btn-outline-primary mx-3">Login</a>
+          <a href="/login" class="btn btn-outline-primary ms-3">Login</a>
         @endauth
 
       </div>
