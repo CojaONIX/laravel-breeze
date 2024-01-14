@@ -20,7 +20,7 @@
               Admin
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Link</a></li>
+              <li><a class="dropdown-item" href="{{ route('admin.forecast.all.page') }}">Admin all</a></li>
               <li><hr class="dropdown-divider"></li>
               <li><a class="dropdown-item" href="{{ route('welcome.page') }}">Welcome</a></li>
             </ul>
