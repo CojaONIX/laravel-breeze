@@ -19,3 +19,5 @@
 - php artisan serve
 - [Generating Model Classes](https://laravel.com/docs/10.x/eloquent#generating-model-classes)
 - php artisan make:middleware AdminCheck
+- php artisan make:seeder ForecastSeeder
+- php artisan db:seed --class=ForecastSeeder
