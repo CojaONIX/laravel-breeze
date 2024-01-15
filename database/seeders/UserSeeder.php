@@ -40,9 +40,10 @@ class UserSeeder extends Seeder
             }
         }
 
+        $amount = $this->command->getOutput()->ask('Koliko korisnika zelite da kreirate?', 5);
         $faker = Factory::create();
-        $this->command->getOutput()->progressStart(5);
-        for($i=0; $i<5; $i++)
+        $this->command->getOutput()->progressStart($amount);
+        for($i=0; $i<$amount; $i++)
         {
             User::create([
                 "name" => $faker->name,
