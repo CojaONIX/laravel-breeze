@@ -21,6 +21,13 @@ class UserWeatherSeeder extends Seeder
             die;
         }
 
+        $dbCity = Forecast::where(['city' => $city])->first();
+        if( !is_null($dbCity))
+        {
+            $console->error("Podaci za grad $city vec postoje u bazi!");
+            die;
+        }
+
         $temperature = $console->ask("Unesite temperaturu za $city?");
         if($temperature === null)
         {
