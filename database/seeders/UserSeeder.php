@@ -17,45 +17,27 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        // password hash: app/Models/User.php -> $casts -> 'password' => 'hashed'
-        $users = [
-            [
-                "name" => "ADMIN",
-                "email" => "admin@admin.com",
-                "password" => "adminadmin", // => Hash:make("adminadmin"),
-                "role" => "admin"
-            ],
-            [
-                "name" => "USER",
-                "email" => "user@user.com",
-                "password" => "useruser",
-                "role" => "user"
-            ]
-        ];
-        foreach ($users as $user)
-        {
-            try {
-                User::create($user);
-            } catch (Throwable $e) {
-            }
-        }
-
-        $amount = $this->command->getOutput()->ask('Koliko korisnika zelite da kreirate?', 5);
-        $password = $this->command->getOutput()->ask('Koja je sifra za sve korisnike?', 'password');
+        $console = $this->command->getOutput();
+        $amount = $console->ask('Koliko korisnika zelite da kreirate?', 5);
+        $password = $console->ask('Koja je sifra za sve korisnike?', 'password');
 
         $faker = Factory::create();
-        $this->command->getOutput()->progressStart($amount);
+        $console->progressStart($amount);
         for($i=0; $i<$amount; $i++)
         {
-            User::create([
-                "name" => $faker->name,
-                "email" => $faker->email,
-                "password" => Hash::make($password),
-                "role" => "user"
-            ]);
-            $this->command->getOutput()->progressAdvance();
+            try {
+                User::create([
+                    "name" => $faker->name(),
+                    "email" => $faker->unique()->safeEmail(),
+                    "password" => Hash::make($password)
+                ]);
+            } catch (Throwable $e) {
+                $amount--;
+            }
+            $console->progressAdvance();
         }
-        $this->command->getOutput()->progressFinish();
+        $console->progressFinish();
+        $console->info("Uspesno je kreirano $amount korisnika");
 
     }
 }
