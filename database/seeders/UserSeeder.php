@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Throwable;
 
 class UserSeeder extends Seeder
 {
@@ -13,6 +16,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
         // password hash: app/Models/User.php -> $casts -> 'password' => 'hashed'
         $users = [
             [
@@ -30,8 +34,25 @@ class UserSeeder extends Seeder
         ];
         foreach ($users as $user)
         {
-            User::create($user);
+            try {
+                User::create($user);
+            } catch (Throwable $e) {
+            }
         }
+
+        $faker = Factory::create();
+        $this->command->getOutput()->progressStart(5);
+        for($i=0; $i<5; $i++)
+        {
+            User::create([
+                "name" => $faker->name,
+                "email" => $faker->email,
+                "password" => Hash::make("password"),
+                "role" => "user"
+            ]);
+            $this->command->getOutput()->progressAdvance();
+        }
+        $this->command->getOutput()->progressFinish();
 
     }
 }
