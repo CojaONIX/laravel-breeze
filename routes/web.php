@@ -19,16 +19,17 @@ Route::view('/', 'home')->name('home.page');
 Route::view('/about', 'about')->name('about.page');
 Route::view('/welcome', 'welcome')->name('welcome.page');
 
-
-
 Route::get('/forecast', [ForecastController::class, 'index'])->middleware('auth')->name('forecast.page');
-Route::middleware('auth')->group(function () {
-    Route::get('/admin/forecast/all', [ForecastController::class, 'getAllForecasts'])->name('admin.forecast.all.page');
-    Route::get('/admin/forecast/add', [ForecastController::class, 'addForecastPage'])->name('admin.forecast.add.page');
-    Route::post('/admin/forecast/add', [ForecastController::class, 'createForecast'])->name('admin.forecast.create');
-    Route::get('/admin/forecast/edit/{forecast}', [ForecastController::class, 'editForecastPage'])->name('admin.forecast.edit.page');
-    Route::put('/admin/forecast/edit/{forecast}', [ForecastController::class, 'updateForecast'])->name('admin.forecast.update');
-    Route::delete('/admin/forecast/delete/{forecast}', [ForecastController::class, 'deleteForecast'])->name('admin.forecast.delete');
+
+Route::middleware(['auth', 'isAdmin'])->prefix('/admin')->name('admin.')->group(function () {
+    Route::controller(ForecastController::class)->prefix('/forecast')->name('forecast.')->group(function () {
+        Route::get('/all', 'getAllForecasts')->name('all.page');
+        Route::get('/add', 'addForecastPage')->name('add.page');
+        Route::post('/add', 'createForecast')->name('create');
+        Route::get('/edit/{forecast}', 'editForecastPage')->name('edit.page');
+        Route::put('/edit/{forecast}', 'updateForecast')->name('update');
+        Route::delete('/delete/{forecast}', 'deleteForecast')->name('delete');
+    });
 });
 
 Route::get('/dashboard', function () {

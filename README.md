@@ -17,3 +17,5 @@
 - npm install
 - npm run dev
 - php artisan serve
+- [Generating Model Classes](https://laravel.com/docs/10.x/eloquent#generating-model-classes)
+- php artisan make:middleware AdminCheck
