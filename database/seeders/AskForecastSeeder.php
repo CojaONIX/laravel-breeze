@@ -18,20 +18,20 @@ class AskForecastSeeder extends Seeder
         if($city === null)
         {
             $console->error("Niste uneli ime grada!");
-            die;
+            return;
         }
 
         if( Forecast::where(['city' => $city])->first() !== null )
         {
             $console->error("Podaci za grad $city vec postoje u bazi!");
-            die;
+            return;
         }
 
         $temperature = $console->ask("Unesite temperaturu za $city?");
         if($temperature === null)
         {
             $console->error("Niste uneli temperaturu!");
-            die;
+            return;
         }
 
         Forecast::create([

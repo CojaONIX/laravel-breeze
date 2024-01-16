@@ -19,28 +19,28 @@ class AskUserSeeder extends Seeder
         if($email === null)
         {
             $console->error("Niste uneli email korisnika!");
-            die;
+            return;
         }
 
         $dbUser = User::where(['email' => $email])->first();
         if($dbUser instanceof User)
         {
             $console->error("U bazi vec postoji korisnik $email!");
-            die;
+            return;
         }
 
         $name = $console->ask("Unesite naziv korisnika?");
         if($name === null)
         {
             $console->error("Niste uneli naziv korisnika!");
-            die;
+            return;
         }
 
         $password = $console->ask("Unesite password korisnika?");
         if($password === null)
         {
             $console->error("Niste uneli password korisnika!");
-            die;
+            return;
         }
 
         User::create([
