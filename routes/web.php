@@ -20,6 +20,8 @@ Route::view('/about', 'about')->name('about.page');
 Route::view('/welcome', 'welcome')->name('welcome.page');
 
 Route::get('/forecast', [ForecastController::class, 'index'])->middleware('auth')->name('forecast.page');
+Route::get('/forecast/{city}', [ForecastController::class, 'getCityForecast'])->name('forecast.city.page');
+
 
 Route::middleware(['auth', 'isAdmin'])->prefix('/admin')->name('admin.')->group(function () {
     Route::controller(ForecastController::class)->prefix('/forecast')->name('forecast.')->group(function () {

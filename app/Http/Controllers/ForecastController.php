@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Forecast;
 use Illuminate\Http\Request;
+use Throwable;
 
 class ForecastController extends Controller
 {
@@ -63,6 +64,23 @@ class ForecastController extends Controller
         $forecast->delete();
 
         return redirect()->route('admin.forecast.all.page')->withSuccess('Forecast is deleted.');
+    }
+
+    public function getCityForecast($city)
+    {
+        $citiesForecast = [
+            'Beograd' => ['pon' => 12, 'uto' => 13, 'sre' => 14, 'cet' => 11, 'pet' => 13],
+            'Novi Sad'  => ['pon' => 10, 'uto' => 13, 'sre' => 12, 'cet' => 12, 'pet' => 14],
+            'Aleksinac' => ['pon' => 11, 'uto' => 9, 'sre' => 11, 'cet' => 14, 'pet' => 13]
+        ];
+
+        try {
+            $cityForecast = $citiesForecast[$city];
+        } catch (Throwable $e) {
+            return view('cityForecast');
+        }
+
+        return view('cityForecast', compact('city', 'cityForecast'));
     }
 
 }
