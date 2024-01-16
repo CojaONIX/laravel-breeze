@@ -6,7 +6,7 @@ use App\Models\Forecast;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserWeatherSeeder extends Seeder
+class AskForecastSeeder extends Seeder
 {
     /**
      * Run the database seeds.

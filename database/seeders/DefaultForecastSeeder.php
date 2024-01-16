@@ -6,7 +6,7 @@ use App\Models\Forecast;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ForecastSeeder extends Seeder
+class DefaultForecastSeeder extends Seeder
 {
     /**
      * Run the database seeds.

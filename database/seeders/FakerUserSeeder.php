@@ -9,14 +9,13 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Throwable;
 
-class UserSeeder extends Seeder
+class FakerUserSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-
         $console = $this->command->getOutput();
         $amount = $console->ask('Koliko korisnika zelite da kreirate?', 5);
         $password = $console->ask('Koja je sifra za sve korisnike?', 'password');
@@ -38,6 +37,5 @@ class UserSeeder extends Seeder
         }
         $console->progressFinish();
         $console->info("Uspesno je kreirano $amount korisnika");
-
     }
 }
