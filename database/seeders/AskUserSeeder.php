@@ -22,7 +22,8 @@ class AskUserSeeder extends Seeder
             die;
         }
 
-        if(User::where(['email' => $email])->first() !== null)
+        $dbUser = User::where(['email' => $email])->first();
+        if($dbUser instanceof User)
         {
             $console->error("U bazi vec postoji korisnik $email!");
             die;
