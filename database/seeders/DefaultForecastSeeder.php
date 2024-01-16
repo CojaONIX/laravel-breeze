@@ -19,13 +19,22 @@ class DefaultForecastSeeder extends Seeder
             "Aleksinac" => 20,
             "Subotica" => 17
         ];
+        $arrCount = count($forecast);
+        $addedCount = 0;
+
+        $dbCities = Forecast::all()->pluck('city')->toArray();
 
         foreach ($forecast as $city => $temperature)
         {
-            Forecast::create([
-                'city' => $city,
-                'temperature' => $temperature
-            ]);
+            if(!in_array($city, $dbCities)) {
+                Forecast::create([
+                    'city' => $city,
+                    'temperature' => $temperature
+                ]);
+                $addedCount++;
+            }
         }
+
+        $this->command->getOutput()->info("Uspesno je kreirano $addedCount / $arrCount default gradova");
     }
 }

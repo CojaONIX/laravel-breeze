@@ -21,8 +21,7 @@ class AskForecastSeeder extends Seeder
             die;
         }
 
-        $dbCity = Forecast::where(['city' => $city])->first();
-        if( !is_null($dbCity))
+        if( Forecast::where(['city' => $city])->first() !== null )
         {
             $console->error("Podaci za grad $city vec postoje u bazi!");
             die;
