@@ -69,10 +69,12 @@ class ForecastController extends Controller
     public function getCityForecast($city)
     {
         $citiesForecast = [
-            'Beograd' => ['pon' => 12, 'uto' => 13, 'sre' => 14, 'cet' => 11, 'pet' => 13],
-            'Novi Sad'  => ['pon' => 10, 'uto' => 13, 'sre' => 12, 'cet' => 12, 'pet' => 14],
-            'Aleksinac' => ['pon' => 11, 'uto' => 9, 'sre' => 11, 'cet' => 14, 'pet' => 13]
+            'beograd' => ['pon' => 12, 'uto' => 13, 'sre' => 14, 'cet' => 11, 'pet' => 13],
+            'novi sad'  => ['pon' => 10, 'uto' => 13, 'sre' => 12, 'cet' => 12, 'pet' => 14],
+            'aleksinac' => ['pon' => 11, 'uto' => 9, 'sre' => 11, 'cet' => 14, 'pet' => 13]
         ];
+
+        $city = strtolower($city);
 
         if(!array_key_exists($city, $citiesForecast))
         {

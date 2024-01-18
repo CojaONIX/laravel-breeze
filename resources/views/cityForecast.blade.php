@@ -5,7 +5,7 @@
 @section('content')
 
     @if(isset($city))
-        <h2>{{ $city }}</h2>
+        <h2>{{ ucwords($city) }}</h2>
         <hr>
 
         <ul>
