@@ -22,7 +22,7 @@ class DefaultForecastSeeder extends Seeder
         $arrCount = count($forecast);
         $addedCount = 0;
 
-        $dbCities = Forecast::all()->pluck('city')->toArray();
+        $dbCities = Forecast::select('city')->pluck('city')->toArray();
 
         foreach ($forecast as $city => $temperature)
         {

@@ -20,7 +20,7 @@ class FakerForecastSeeder extends Seeder
 
         $faker = Factory::create('sr_Latn_RS');
 
-        $dbCities = Forecast::all()->pluck('city')->toArray();
+        $dbCities = Forecast::select('city')->pluck('city')->toArray();
         $addedCount = 0;
         for($i=0; $i<$count; $i++)
         {
