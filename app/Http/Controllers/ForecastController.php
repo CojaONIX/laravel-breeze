@@ -74,11 +74,12 @@ class ForecastController extends Controller
             'Aleksinac' => ['pon' => 11, 'uto' => 9, 'sre' => 11, 'cet' => 14, 'pet' => 13]
         ];
 
-        try {
-            $cityForecast = $citiesForecast[$city];
-        } catch (Throwable $e) {
+        if(!array_key_exists($city, $citiesForecast))
+        {
             return view('cityForecast');
         }
+
+        $cityForecast = $citiesForecast[$city];
 
         return view('cityForecast', compact('city', 'cityForecast'));
     }
