@@ -22,6 +22,7 @@ class FakerUserSeeder extends Seeder
 
         $faker = Factory::create();
         $console->progressStart($amount);
+        $addedCount = 0;
         for($i=0; $i<$amount; $i++)
         {
             try {
@@ -30,12 +31,12 @@ class FakerUserSeeder extends Seeder
                     "email" => $faker->unique()->safeEmail(),
                     "password" => Hash::make($password)
                 ]);
+                $addedCount++;
             } catch (Throwable $e) {
-                $amount--;
             }
             $console->progressAdvance();
         }
         $console->progressFinish();
-        $console->info("Uspesno je kreirano $amount korisnika");
+        $console->info("Uspesno je kreirano $addedCount korisnika");
     }
 }
